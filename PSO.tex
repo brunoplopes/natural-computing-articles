@@ -30,99 +30,46 @@ O objectivo deste artigo é conseguir implementar e avaliar a eficiência de Alg
 	As pesquisas sobre PSO geralmente podem ser categorizadas em cinco partes: algoritmos, topologia, parâmetros, algoritmos de PSO híbridos e aplicativos.
 
 \section{Referencial Teórico}
+	As idéias iniciais sobre os enxames de partículas de Kennedy (um psicólogo social) e Eberhart (um engenheiro elétrico) visavam essencialmente produzir inteligência computacional explorando análogos simples de interação social, em vez de habilidades cognitivas puramente individuais. As primeiras simulações \cite{b1} foram influenciadas pelo trabalho de Heppner e Grenander \cite{b2} e envolveram análogos de bandos de aves em busca de milho. Estes logo se desenvolveram (Kennedy e Eberhart, 1995; Eberhart e Kennedy, 1995; Eberhart et al., 1996) em um poderoso método de otimização - Optimização de Enxame de Partículas (PSO).
 
-Algoritmos Genéticos são algoritmos de otimização global, baseados nos mecanismos de seleção natural e da genética \cite{b2}. Eles empregam uma estratégia de busca paralela e estruturada, mas aleatória, que é voltada em direção ao reforço da busca de pontos de "alta aptidão", ou seja, pontos nos quais a função a ser minimizada (ou maximizada) tem valores relativamente baixos (ou altos).
+	No PSO, um número de entidades simples - as partículas - são colocadas no espaço de busca de algum problema ou função, e cada uma avalia a função objetivo em sua localização atual. Cada partícula determina seu movimento através do espaço de busca combinando algum aspecto da sua história de suas próprias localizações com as de um ou mais membros do enxame, com algumas perturbações aleatórias. A próxima iteração ocorre depois que todas as partículas foram movidas. 
+	
+	Eventualmente, o enxame como um todo, como um bando de pássaros em busca de comida coletivamente, provavelmente se aproxima de um ótimo da função de condicionamento físico.
+	
+	O enxame de partículas é mais do que apenas uma coleção de partículas. Uma partícula por si só quase não tem poder para resolver qualquer problema; o progresso ocorre apenas quando as partículas interagem.
 
-Os princípios da natureza nos quais os GAs se inspiram são simples. De  acordo com  a teoria de C. Darwin, o princípio de seleção privilegia os indivíduos mais aptos com maior longevidade e, portanto, com maior probabilidade de reprodução. Indivíduos  com  mais descendentes têm mais chance de perpetuarem seus códigos genéticos nas próximas   gerações.
+	Cada partícula se comunica com algumas outras partes e é afetada pelo melhor ponto encontrado por qualquer membro de sua vizinhança topológica. 
 
-Os algoritmos genéticos foram introduzidos por J. Holland em 1975 \cite{b1} com o objetivo de formalizar matematicamente e explicar rigorosamente processos de adaptação em sistemas naturais e desenvolver sistemas artificiais artificiais (simulados em computador) que retenham os mecanismos originais encontrados em  sistemas  naturais. 
-
-Em 1975, Holland publicou o livro Adaptation in Natural and Artificial Systems, hoje considerado a Bíblia de Algoritmos Genéticos. Desde então, estes algoritmos vêm sendo aplicados com sucesso nos mais diversos problemas de otimização e aprendizado de máquina. 
-
-Os AG's possuem uma larga aplicação em muitas áreas científicas, entre as quais podem ser destacadas:
-    
-    \begin{itemize}
-    \item Síntese de circuitos analógicos:  para uma certa entrada e uma saída desejada, por exemplo tensão, o AG gera a topologia , o tipo e o valor dos componentes do circuito.
-
-    \item Síntese de protocolos:  determinação de quais funções do protocolo devem ser implementadas em hardware e quais devem ser implementadas em software para que um certo desempenho seja alcançado.
-
-    \item Programação Genética: gera a listagem de um programa, numa determinada linguagem especificada, para que um determinado conjunto de dados de entrada forneça uma saída desejada.
-
-    \item Gerenciamento de redes: supervisão do tráfego nos links e das filas nos "buffers" de roteadores para descobrir rotas ótimas e para reconfigurar as rotas existentes no caso de falha de algum link.
-
-    \item Computação Evolutiva: gera programas que se adaptam a mudanças no sistema ao longo do tempo.
-
-    \item Otimização evolutiva multi-critério: otimização de funções com múltiplos objetivos que sejam conflitantes.
-
-    \item Problemas de otimização complexos: problemas com muitas variáveis e espaços de soluções de dimensões elevadas. Ex: problema do caixeiro viajante, gerenciamento de carteiras de fundos de investimento.
-
-    \item Ciências biológicas:  modela processos biológicos para o entendimento do comportamento de estruturas genéticas.
-
-    \item Autômatos auto-programáveis.
-    \end{itemize}
-
-A idéia básica de funcionamento dos algoritmos genéticos é a de tratar as possíveis soluções do problema como "indivíduos" de uma "população", que irá "evoluir" a cada iteração ou "geração". Para isso é necessário construir um modelo de evolução onde os indivíduos sejam soluções de um problema. 
-
- A estrutura geral do programa está apresentada na Figura1 e os detalhes da execução do algoritmo pode ser resumida nos seguintes passos:
-    \begin{itemize}
-    \item População inicial, normalmente formada por indivíduos criados aleatoriamente;
-    Avaliar a população de indivíduos segundo algum critério de qualidade (função de aptidão ou "fitness");
-    
-    \item Em seguida, através do operador de "seleção", escolhem-se os indivíduos de mais aptos com maior longevidade para a criação de um novo conjunto de possíveis soluções, chamado de nova "geração";
-    
-    \item Esta nova geração é obtida aplicando-se sobre os indivíduos selecionados operações que misturem suas características (chamadas "genes"), através dos operadores de "cruzamento" ("crossover") e "mutação";
-    
-    \item Estes passos são repetidos até que uma solução aceitável seja encontrada, até que o número predeterminado de passos seja atingido ou até que o algoritmo não consiga mais melhorar a solução já encontrada.
-    \end{itemize}
-    
-    \begin{figure}[htbp]
-    \centerline{\includegraphics[scale=0.4]{algoritmo-genetico.png}}
-    \caption{Estrutura básica de um algoritmo}
-    \label{fig}
-    \end{figure}
-    
-    Até o presente momento todos os fundamentos apresentados basearam-se na nos algoritmos genéticos simples. Existem outros tipos de algoritmos genéticos que foram desenvolvidos para problemas mais específicos.
+	O algoritmo básico de otimização por enxame de partículas pode ser descrito brevemente utilizando os seguintes passos: dada uma população inicial de partículas, atualiza-se o vetor posição a partir do vetor velocidade de cada partícula até que se atinja o critério de parada pré-definido. 
+	
+	A figura abaixo ilustra essa lógica:
+	
+	\begin{figure}[htbp]
+	\centerline{\includegraphics[scale=0.4]{pso_algoritmo.JPG}}
+	\caption{Fluxograma-Algoritmo PSO}
+	\label{fig}
+	\end{figure}
+	
+	O enxame é inicializado com os valores dos vetores de velocidade e posição gerados aleatoriamente. A primeira iteração do algoritmo inicia com a atribuição de valores aos parâmetros da equação de velocidade. Definem-se então os valores referentes ao enxame, constantes e o critério de parada. Tendo já definido os valores para posição das partículas e suas respectivas velocidades, aplica-se o cálculo do fitness a cada partícula desta população. Conforme explicado anteriormente, o fitness avalia o desempenho da partícula. Com as partículas do enxame avaliadas, extraem-se os pbest e o gbest, isto é, a melhor posição encontrada pela partícula e pelo enxame. Depois as velocidades e as posições de cada partícula do enxame são atualizadas. Diante das novas posições, caso o critério de parada tenha sido atingido, a solução do problema encontrada é apresentada. Caso contrário, aplica-se novamente o fitness a este enxame, atualizam-se os valores de pbest e gbest, caso seja apresentada uma solução melhor, seguido da velocidade e posição de cada partícula do enxame. O laço prossegue até o critério de parada ter sido atingido.
     
 \section{Metodologia Experimental}
 
-Em geral, um AG possui duas categorias de parâmetros da pesquisa experimental: qualitativos e quantitativos. Os principais parâmetros qualitativos são os tipos de crossover (um ponto, dois pontos e múltiplos pontos) e os métodos de seleção (proporcional, escalonamento, Boltzmann, ranqueamento e tournament). Os principais parâmetros quantitativos são constituídos pelo tamanho da população (n), pela taxa de crossover (TC) e pela taxa de mutação (Tm). 
 
-Para os experimentos realizados neste trabalho, utilizamos somente a metodologia quantitativa pois somente os parâmetros básicos foram alterados. Como por exemplo: tamanho da população, taxa de crossover e mutação além do tamanho do genótipo a ser encontrado.
-
-Os objectivos da investigação quantitativa consistem essencialmente em encontrar relações entre variáveis, fazer descrições recorrendo ao tratamento estatístico dos dados recolhidos, testar teorias e tirar conclusões.
 
 \section{Resultado e Discussão}
 
-Na Tabela 1 estão resumidos os resultados dos experimentos realizados. Pode-se observar que as mudanças realizadas na taxa de crossover e mutação influenciam de forma significativa no número de iterações necessárias para encontrar o genótipo.  
 
-Mas se esta for muito alta, estruturas com boas aptidões poderão ser retiradas mais rápida um valor alto, a maior parte da população será substituída, mas com valores muito altos pode ocorrer perda de estruturas de alta aptidão. Com um valor baixo, o algoritmo demorou um tempo maior para convergir.
-
-    \begin {table}
-    \caption {Resumo experimentos}
-    \begin{center}
-      \begin{tabular}{ l | c | r }
-        \hline
-
-        20&	16&	10.00 \\
-        \hline
-      \end{tabular}
-      \end{center}
-    \end{table}
-
-Uma baixa taxa de mutação previne que uma dada posição fique estagnada em um valor, além de possibilitar que se chegue em qualquer ponto do espaço de busca. Com uma taxa muito alta a busca se torna essencialmente aleatória.
-    
-Vale ressaltar que o algoritmo de seleção utilizado nos experimentos foi o seleção por roleta. Quanto melhores são os cromossomos, mais chances de serem selecionados, mas por outro lado, existe a probabilidade da perda do melhor indivíduo.
 
 \section*{Conclusão}
 
-O principal objetivo deste trabalho foi entender o funcionamento de um algoritmo genético clássico e desenvolver uma solução que pudesse gerar novos indivíduos, até que um determinado genótipo fosse encontrado. Foram testados os efeitos dos parâmetros passados para o método de crossover, tamanho da população e taxa de mutação. Foi possível perceber que houve diferenças na quantidade de gerações necessárias para encontrar o genótipo, levando em consideração a quantidade de indivíduos, taxa de crossover e mutação.
 
-O melhor desempenho do algoritmo genético é dependente da escolha de uma boa configuração de seus parâmetros.
 
 
 \begin{thebibliography}{00}
 
 \bibitem{b1} Kennedy, J., and Eberhart, R. C.. (1995). Particle swarm optimization, Proc. of IEEE International Conference on Neural Networks (ICNN), Vol.IV, pp.1942-1948, Perth, Australia, 1995.
+\bibitem{b2} Heppner, H., \& Grenander, U. (1990). A stochastic non-linear model for coordinated bird flocks. In S. Krasner
+(Ed.), The ubiquity of chaos (pp. 233–238). Washington: AAAS.
 \end{thebibliography}
 \vspace{12pt}
 
