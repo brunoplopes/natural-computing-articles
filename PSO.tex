@@ -52,9 +52,30 @@ O objectivo deste artigo é conseguir implementar e avaliar a eficiência de Alg
 	
 	O enxame é inicializado com os valores dos vetores de velocidade e posição gerados aleatoriamente. A primeira iteração do algoritmo inicia com a atribuição de valores aos parâmetros da equação de velocidade. Definem-se então os valores referentes ao enxame, constantes e o critério de parada. Tendo já definido os valores para posição das partículas e suas respectivas velocidades, aplica-se o cálculo do fitness a cada partícula desta população. Conforme explicado anteriormente, o fitness avalia o desempenho da partícula. Com as partículas do enxame avaliadas, extraem-se os pbest e o gbest, isto é, a melhor posição encontrada pela partícula e pelo enxame. Depois as velocidades e as posições de cada partícula do enxame são atualizadas. Diante das novas posições, caso o critério de parada tenha sido atingido, a solução do problema encontrada é apresentada. Caso contrário, aplica-se novamente o fitness a este enxame, atualizam-se os valores de pbest e gbest, caso seja apresentada uma solução melhor, seguido da velocidade e posição de cada partícula do enxame. O laço prossegue até o critério de parada ter sido atingido.
     
+    
 \section{Metodologia Experimental}
+    
+    Em geral, um AG possui duas categorias de parâmetros da pesquisa experimental: qualitativos e quantitativos. Os principais parâmetros qualitativos são os tipos de crossover (um ponto, dois pontos e múltiplos pontos) e os métodos de seleção (proporcional, escalonamento, Boltzmann, ranque- amento e tournament). Os principais parâmetros quantitativos são constituídos pelo tamanho da população (n), pela taxa de crossover (TC) e pela taxa de mutação (Tm).
+    
+	\begin{figure}[htbp]
+    \begin{center}
+    	\includegraphics[scale=0.3]{imagens-pso/particle-swarm-optimization-01.png} 
+        \includegraphics[scale=0.3]{imagens-pso/particle-swarm-optimization-02.png}
+        \includegraphics[scale=0.3]{imagens-pso/particle-swarm-optimization-03.png}
+        \includegraphics[scale=0.3]{imagens-pso/particle-swarm-optimization-04.png}
+    \caption{Algoritmo padrão} \label{gdimotes}
+    \end{center}
+    \end{figure}
 
-
+	\begin{figure}[htbp]
+    \begin{center}
+    	\includegraphics[scale=0.3]{imagens-pso/particle-swarm-optimization-leader-moving-01.png}
+    	\includegraphics[scale=0.3]{imagens-pso/particle-swarm-optimization-leader-moving-02.png}
+    	\includegraphics[scale=0.3]{imagens-pso/particle-swarm-optimization-leader-moving-03.png}
+    	\includegraphics[scale=0.3]{imagens-pso/particle-swarm-optimization-leader-moving-04.png}    	
+    \caption{Motes instalados na Great Duck Island} \label{gdimotes}
+    \end{center}
+    \end{figure}
 
 \section{Resultado e Discussão}
 
