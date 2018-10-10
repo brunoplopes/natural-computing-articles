@@ -24,11 +24,13 @@ O objectivo deste artigo é conseguir implementar e avaliar a eficiência de Alg
 
 \end{abstract}
 
+\vspace*{1cm}
 \section{INTRODUÇÃO}
 	A otimização de enxame de partículas (PSO) é uma das técnicas evolutivas de computação. Como as outras técnicas de computação evolutiva, o PSO é um algoritmo de busca baseado na população e é inicializado com uma população de soluções aleatórias, chamadas partículas. Ao contrário das outras técnicas de computação evolucionária, cada partícula em PSO também está associada a uma velocidade. Partículas voam através do espaço de busca com velocidades que são ajustadas dinamicamente de acordo com seus comportamentos históricos. Portanto, as partículas tendem a voar em direção à melhor e melhor área de pesquisa ao longo do processo de busca. Desde sua introdução em 1995 \cite{b1}, a PSO atraiu muitas atenções de pesquisadores de todo o mundo. Muitos resultados de pesquisa foram relatados na literatura. Em 2003, o primeiro Simpósio IEEE sobre Inteligência de Enxame foi realizado em Indianápolis, Indiana, EUA. 
 		
 	As pesquisas sobre PSO geralmente podem ser categorizadas em cinco partes: algoritmos, topologia, parâmetros, algoritmos de PSO híbridos e aplicativos.
 
+\vspace*{1cm}
 \section{Referencial Teórico}
 	As idéias iniciais sobre os enxames de partículas de Kennedy (um psicólogo social) e Eberhart (um engenheiro elétrico) visavam essencialmente produzir inteligência computacional explorando análogos simples de interação social, em vez de habilidades cognitivas puramente individuais. As primeiras simulações \cite{b1} foram influenciadas pelo trabalho de Heppner e Grenander \cite{b2} e envolveram análogos de bandos de aves em busca de milho. Estes logo se desenvolveram (Kennedy e Eberhart, 1995; Eberhart e Kennedy, 1995; Eberhart et al., 1996) em um poderoso método de otimização - Optimização de Enxame de Partículas (PSO).
 
@@ -53,38 +55,69 @@ O objectivo deste artigo é conseguir implementar e avaliar a eficiência de Alg
 	O enxame é inicializado com os valores dos vetores de velocidade e posição gerados aleatoriamente. A primeira iteração do algoritmo inicia com a atribuição de valores aos parâmetros da equação de velocidade. Definem-se então os valores referentes ao enxame, constantes e o critério de parada. Tendo já definido os valores para posição das partículas e suas respectivas velocidades, aplica-se o cálculo do fitness a cada partícula desta população. Conforme explicado anteriormente, o fitness avalia o desempenho da partícula. Com as partículas do enxame avaliadas, extraem-se os pbest e o gbest, isto é, a melhor posição encontrada pela partícula e pelo enxame. Depois as velocidades e as posições de cada partícula do enxame são atualizadas. Diante das novas posições, caso o critério de parada tenha sido atingido, a solução do problema encontrada é apresentada. Caso contrário, aplica-se novamente o fitness a este enxame, atualizam-se os valores de pbest e gbest, caso seja apresentada uma solução melhor, seguido da velocidade e posição de cada partícula do enxame. O laço prossegue até o critério de parada ter sido atingido.
     
     
+    \vspace*{1cm}
 \section{Metodologia Experimental}
     
-    Em geral, um AG possui duas categorias de parâmetros da pesquisa experimental: qualitativos e quantitativos. Os principais parâmetros qualitativos são os tipos de crossover (um ponto, dois pontos e múltiplos pontos) e os métodos de seleção (proporcional, escalonamento, Boltzmann, ranque- amento e tournament). Os principais parâmetros quantitativos são constituídos pelo tamanho da população (n), pela taxa de crossover (TC) e pela taxa de mutação (Tm).
+    Em geral, o PSO possui categorias de parâmetros de pesquisa experimental: qualitativa e quantitativa. Nesse trabalho grande parte dos experimentos foram realizados mudando paramétros qualitativos.
     
+    Os resultados exibidos na Figura 2 foram gerados com uma população de 150 particulas e arquitetura GBEST. Na Figura 3 é possível ver o número de iterações necessárias para encontrar a solução ótima.
 	\begin{figure}[htbp]
     \begin{center}
     	\includegraphics[scale=0.3]{imagens-pso/particle-swarm-optimization-01.png} 
         \includegraphics[scale=0.3]{imagens-pso/particle-swarm-optimization-02.png}
         \includegraphics[scale=0.3]{imagens-pso/particle-swarm-optimization-03.png}
         \includegraphics[scale=0.3]{imagens-pso/particle-swarm-optimization-04.png}
-    \caption{Algoritmo padrão} \label{gdimotes}
+    \caption{Comportamento algoritmo PSO} \label{gdimotes}
+    \includegraphics[scale=0.5]{imagens-pso/particle-swarm-optimization-cost.png}
+    \caption{Custo algoritmo PSO} \label{gdimotes}
     \end{center}
     \end{figure}
+
+\vspace*{1cm}
+    Alterando apenas o número de particulas, mudando para 10, conseguimos ver um comportamento, onde foi necessário um tempo maior para encontrar a solução ótima, como mostra na Figura 5 com o gráfico da função de custo.
+
+
+	\begin{figure}[htbp]
+    \begin{center}
+    	\includegraphics[scale=0.3]{imagens-pso/particle-swarm-optimization-particles-0.png}
+    	\includegraphics[scale=0.3]{imagens-pso/particle-swarm-optimization-particles-02.png}
+    	\includegraphics[scale=0.3]{imagens-pso/particle-swarm-optimization-particles-03.png}
+    	\includegraphics[scale=0.3]{imagens-pso/particle-swarm-optimization-particles-04.png}
+    \caption{Comportamento algoritmo PSO poucas particulas} \label{gdimotes}
+    \includegraphics[scale=0.5]{imagens-pso/particle-swarm-optimization-particles-cost.png}
+    \caption{Custo algoritmo PSO poucas particulas} \label{gdimotes}
+    \end{center}
+    \end{figure}
+
+\vspace*{4cm}
+    Afim de verificar o comportamento do algoritmo, caso fosse dado a permissão a apenas uma partícula de informar qual a melhor posição, foi inserido um "lider", cuja sua localização era considerada a melhor da matriz, fazendo assim com que todas as outras a seguissem. Lembrando que a mesma esta em movimento, fazendo assim que todas as outras a seguissem.
 
 	\begin{figure}[htbp]
     \begin{center}
     	\includegraphics[scale=0.3]{imagens-pso/particle-swarm-optimization-leader-moving-01.png}
     	\includegraphics[scale=0.3]{imagens-pso/particle-swarm-optimization-leader-moving-02.png}
     	\includegraphics[scale=0.3]{imagens-pso/particle-swarm-optimization-leader-moving-03.png}
-    	\includegraphics[scale=0.3]{imagens-pso/particle-swarm-optimization-leader-moving-04.png}    	
-    \caption{Motes instalados na Great Duck Island} \label{gdimotes}
+    	\includegraphics[scale=0.3]{imagens-pso/particle-swarm-optimization-leader-moving-04.png}
+    \caption{Comportamento particula lider em movimento} \label{gdimotes}
+    \includegraphics[scale=0.5]{imagens-pso/particle-swarm-optimization-leader-moving-cost.png}
+    \caption{Custo algoritmo PSO poucas particulas} \label{gdimotes}
     \end{center}
     \end{figure}
 
+\vspace*{1cm}
 \section{Resultado e Discussão}
 
-
-
+    Desde as primeiras utilizações das topologias ditas padrão, GBEST e LBEST, os resultados dos experimentos têm demonstrado que na topologia GBEST há uma tendência de rápida convergência com uma inconveniente característica de atração por mínimos locais, já que a trajetória de cada partícula individual é diretamente influenciada pelo melhor ponto encontrado por qualquer membro da população. Como a melhor localização é compartilhada entre todas as particulas, foi possível perceber que com apenas poucas iterações é possível encontrar a melhor solução, como mostra na Figura 3.
+    
+    Outro experimento foi realizando com uma população menor, afim de verificar qual seria o resultado. Ao inserir apenas 10 indivíduos, conseguimos ver um comportamento diferente daqueles encontrados em populações maiores. Comparando os gráficos da Figura 3 e Figura 5, conseguimos ver que foi necessário um número maior de iterações para encontrar a solução.
+    
+    No último experimento, inserimos dentro da nossa população um lider, que seria o responsável por informar para onde as particulas deveriam ir, nesse caso, informar qual a melhor posição (GBEST). A melhor posição era a do proprio lider, que ficava em movimento pela matriz, gerando um comportamento parecido com uma revoada de passaros.
+    
 \section*{Conclusão}
 
-
-
+    O principal objetivo desse trabalho foi implementar o algoritmo para obter uma melhor compreensão sobre os efeitos do uso de uma vizinhança complexa com topologia auto-ajustável sobre o desempenho de mecanismos de inteligência coletiva. 
+    
+    A partir dos resultados obtidos, verifica-se o desempenho do algoritmo, pois é capaz de gerar soluções de boa qualidade.
 
 \begin{thebibliography}{00}
 
