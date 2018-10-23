@@ -14,7 +14,7 @@
     T\kern-.1667em\lower.7ex\hbox{E}\kern-.125emX}}
 \begin{document}
 
-\title{Sistemas Imunológicos Artificiais}
+\title{Algoritmo Imunológico Artificial CLONALG}
 
 \author{Bruno Lopes}
 \maketitle
@@ -24,12 +24,31 @@
 
 \end{abstract}
 
-\vspace*{1cm}
 \section{INTRODUÇÃO}
 
-\vspace*{1cm}
 \section{Referencial Teórico}
-	
+	Os Sistemas Imunológicos Artificiais (SIA) são compostos por modelos inspirados na atividade do Sistema Imunológico Biológico em um organismo. Tais modelos apresentam características adaptativas e evolutivas, sendo possível então a criação de algoritmos imuneinspirados com as mesmas capacidades. Esta técnica constitui uma bioinpiração e faz parte da área da Computação Natural, que surgiu como uma nova área de pesquisa na computação nas ultimas décadas \cite{LNCASTRO}.
+
+    O algoritmo de seleção clonal (CLONALG) é inspirado no princípio de seleção clonal e nos mecanismos de  seleção e  maturação proporcional a afinidade  \cite{LNCASTRO2}. Este algoritmo é  uma abordagem clássica imunológica, cujo princípio básico de funcionamento é classificado como algoritmos evolutivos (AE) e têm se destacado pela eficiente solução de problemas de busca e otimização, principalmente os de caráter combinatório. 
+    
+    Os  algoritmos evolutivos  propõem um  paradigma de  solução  de problemas  através  da inspiração  na  biologia  evolutiva,  principalmente  na  teoria  da  seleção  natural.  Dada  uma população de indivíduos, os de melhor qualidade têm maior probabilidade de sobrevivência e reprodução,  podendo  continuar  no  processo  de  busca  pela  solução  ótima.  Esta  é  uma característica  da  evolução  das  espécies  que  também é  observada  em alguns  algoritmos  de sistemas imunológicos artificiais, como o algoritmo CLONALG, que são baseados na teoria da seleção clonal e maturação de afinidade \cite{LNCASTRO2}.
+    
+    Na sequência apresenta-se o algoritmo CLONALG:
+    \begin{itemize}
+    
+    \item Passo 1: Gere uma população (P) com N anticorpos (soluções candidatas);
+    
+    \item Passo  2:  Avalie  a  afinidade  (função  objetivo)  de  cada  anticorpo  e  selecione  (processo de seleção) os n melhores anticorpos da população P, obtendo o conjunto Pn; 
+    
+    \item Passo 3: Reproduza  (processo de clonagem) os  n melhores anticorpos selecionados, gerando uma  população  (C)  com  Nc  clones; 
+    
+    \item Passo 4: Submeta a população de clones (C) a um processo de hipermutação, onde a taxa de mutação é proporcional à afinidade do anticorpo. Uma população (C*) de anticorpos maduros/maturados  é  gerada. Para  fazer  a  maturação nos  anticorpos  clonados  foi utilizado o método de melhoria 2-opt [12]; 
+    
+    \item Passo 5: Avalie a afinidade de cada anticorpo pertencente a (C*) e re-selecione os n melhores anticorpos  (C*{n})  e os  adicione a  população P  descartando  os anticorpos  de pior qualidade; 
+    
+    \item Passo 6: Substitua d anticorpos de baixa afinidade por novos anticorpos (P{d}) (diversidade ou metadinâmica). Os anticorpos com baixa afinidade possuem maior probabilidade de serem substituídos. Os novos anticorpos sáo gerados da mesma forma que os; 
+    \item Passo 7: Repita os passos de 2 a 6 até satisfazer o critério de parada. 
+    \end{itemize}
     
 \section{Metodologia Experimental}
     
@@ -42,7 +61,11 @@
 
 \begin{thebibliography}{00}
 
-\bibitem{b1} exemplo
+\bibitem{LNCASTRO} L.  N.  de  Castro.  “Engenharia  Imunológica:  Desenvolvimento  e  Aplicação  de  Ferramentas Computacionais  Inspiradas  em  Sistemas  Imunológicos  Artificiais”.  Tese  de  Doutorado,  Faculdade  de Engenharia Elétrica e de Computação, Universidade Estadual de Campinas, Campinas, Brasil, 2001.
+
+\bibitem{LNCASTRO2} L. N. de Castro and J. F. Von Zuben.  The clonal selection algorithm with engineering applications. In: Workshop Proceedings of Gecco, Workshop on Artificial Immune Systems and Their Applications, 2000, Las Vegas. p. 36-39, (2000)
+
+\bibitem{SOUZA} Souza, Simone & Romero, Ruben. (2014). Algoritmo Imunológico Artificial CLONALG e Algoritmo Genético Aplicados ao Problema do Caixeiro Viajante. 10.5540/03.2014.002.01.0106. 
 \end{thebibliography}
 
 \end{document}
